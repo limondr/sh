@@ -17,17 +17,18 @@
    isAllTrue([100, 2, 3, 4, 5], n => n < 10) // вернет false
  */
 function isAllTrue(array, fn) {
-  if (!(Array.isArray(array)) || !(array.length)) {
-    throw new Error('empty array');
-  } else if (typeof (fn) !== 'function') {
-    throw new Error('fn is not a function');
-  }
-  for (let i = 0; i < array.length; i++) {
-    if (fn(array[i]) == false) {
-      return false
+    if (!(array.constructor === Array) || !(array.length)) {
+        throw new Error('empty array');
+    } else if (typeof (fn) !== 'function') {
+        throw new Error('fn is not a function');
     }
-  }
-  return true
+    for (let i = 0; i < array.length; i++) {
+        if (fn(array[i]) == false) {
+            return false
+        }
+    }
+    
+    return true
 }
 
 /*
@@ -47,18 +48,19 @@ function isAllTrue(array, fn) {
  isSomeTrue([1, 2, 3, 4, 5], n => n > 20) // вернет false
 */
 function isSomeTrue(array, fn) {
-  if (!(Array.isArray(array)) || !(array.length)) {
-    throw new Error('empty array');
-  } else if (typeof (fn) !== 'function') {
-    throw new Error('fn is not a function');
-  }
-
-  for (let i = 0; i < array.length; i++) {
-    if (fn(array[i]) == true) {
-      return true;
+    if (!(array.constructor === Array) || !(array.length)) {
+        throw new Error('empty array');
+    } else if (typeof (fn) !== 'function') {
+        throw new Error('fn is not a function');
     }
-  }
-  return false;
+
+    for (let i = 0; i < array.length; i++) {
+        if (fn(array[i]) == true) {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 /*
@@ -73,19 +75,20 @@ function isSomeTrue(array, fn) {
  - fn не является функцией (с текстом "fn is not a function")
 */
 function returnBadArguments(fn) {
-  if (typeof fn !== 'function') {
-    throw new Error('fn is not a function');
-  }
-  let badArgs = [];
-
-  for (let i = 1; i < arguments.length; i++) {
-    try {
-      fn(arguments[i])
-    } catch (e) {
-      badArgs.push(arguments[i]);
+    if (typeof fn !== 'function') {
+        throw new Error('fn is not a function');
     }
-  }
-  return badArgs;
+    let badArgs = [];
+
+    for (let i = 1; i < arguments.length; i++) {
+        try {
+            fn(arguments[i])
+        } catch (e) {
+            badArgs.push(arguments[i]);
+        }
+    }
+    
+    return badArgs;
 }
 
 /*
@@ -106,38 +109,41 @@ function returnBadArguments(fn) {
  - какой-либо из аргументов div является нулем (с текстом "division by 0")
 */
 function calculator(number = 0) {
-  if (typeof number != 'number') {
-    throw new Error('number is not a number');
-  }
-
-  var obj = {
-    sum: function (...args) {
-      return args.reduce((pre, cur) => pre + cur, number);
-    },
-    dif: function (...args) {
-      return args.reduce((pre, cur) => pre - cur, number);
-    },
-    div: function (...args) {
-      let division = (pre, cur) => {
-        if ((pre === 0) || (cur === 0)) {
-          throw new Error('division by 0');
-        }
-        return pre / cur;
-      }
-      return args.reduce(division, number);
-    },
-    mul: function (...args) {
-      return args.reduce((pre, cur) => pre * cur, number);
+    if (typeof number != 'number') {
+        throw new Error('number is not a number');
     }
-  }
-  return obj
+
+    var obj = {
+        sum: function (...args) {
+            return args.reduce((pre, cur) => pre + cur, number);
+        },
+        dif: function (...args) {
+            return args.reduce((pre, cur) => pre - cur, number);
+        },
+        div: function (...args) {
+            let division = (pre, cur) => {
+                if ((pre === 0) || (cur === 0)) {
+                    throw new Error('division by 0');
+                }
+                
+                return pre / cur;
+            }
+      
+            return args.reduce(division, number);
+        },
+        mul: function (...args) {
+            return args.reduce((pre, cur) => pre * cur, number);
+        }
+    }
+  
+    return obj
 }
 
 /* При решении задач, пострайтесь использовать отладчик */
 
 export {
-  isAllTrue,
-  isSomeTrue,
-  returnBadArguments,
-  calculator
+    isAllTrue,
+    isSomeTrue,
+    returnBadArguments,
+    calculator
 };
