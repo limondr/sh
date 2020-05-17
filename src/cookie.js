@@ -43,10 +43,83 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
-filterNameInput.addEventListener('keyup', function() {
-    // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+window.addEventListener('load', () => {
+    let cookie = getCookie();
+
+    iterrateCookieObj(cookie);
 });
+
+function getCookie() {
+    if (!document.cookie) {
+        return; 
+    }
+
+    const cookieAll = document.cookie.split('; ');
+    const cookieObj = cookieAll.reduce((prev, current) => {
+        let [name, value] = current.split('=');
+
+        prev[name] = value;
+    
+        return prev;
+    }, {});
+
+    return cookieObj;
+}
+
+function iterrateCookieObj(cookieObj) {
+    if (!cookieObj) {
+        return; 
+    }
+
+    listTable.innerHTML = '';
+    for (const key in cookieObj) {
+        if (cookieObj.hasOwnProperty(key)) {
+            createTR(key, cookieObj[key]);
+        }
+    }
+}
+
+function isMatching(full, chunk) {
+    return full.includes(chunk);
+}
+
+function createTR(name, value) {
+    let tr = document.createElement('tr');
+
+    tr.innerHTML = '<td>' + name + '</td><td>' + value + '</td><td><button>Удалить</button></td>';
+    listTable.appendChild(tr);
+}
+
+filterNameInput.addEventListener('keyup', filter);
+
+function filter() {
+    let filterGetCookie = getCookie();
+    let value = filterNameInput.value;
+
+    for (const key in filterGetCookie) {
+        if (filterGetCookie.hasOwnProperty(key)) {
+            if (!isMatching(filterGetCookie[key], value) && !isMatching(key, value)) {
+                delete filterGetCookie[key];
+            }
+        }
+    }
+    iterrateCookieObj(filterGetCookie);
+
+}
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
+    document.cookie = `${addNameInput.value}=${addValueInput.value}`;
+    filter();
 });
+
+listTable.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        let tr = e.target.closest('tr');
+        let deletedCookie = tr.children[0].textContent;
+        let date = new Date(0);
+
+        document.cookie = `${deletedCookie}=; expires=${date.toUTCString()}`;
+        tr.remove();
+    }
+})
