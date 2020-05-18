@@ -152,7 +152,7 @@ function filterTowns(chunk) {
 }
 
 filterInput.addEventListener('keyup', function() {
-    // это обработчик нажатия кливиш в текстовом поле
+    // это обработчик нажатия клавиш в текстовом поле
     filterTowns(event.target.value);
 });
 
