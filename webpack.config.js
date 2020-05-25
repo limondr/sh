@@ -23,14 +23,33 @@ module.exports = {
           'sass-loader',
         ],
       },
-    //   {
-    //     test: /\.(png|jpe?g|gif|svg)$/i,
-    //     use: [
-    //       {
-    //         loader: 'file-loader',
-    //       },
-    //     ],
-    //   }
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              options: {},
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot)$/,
+        use: 'file-loader?name=fonts/[name].[ext]!static'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      }
     ]
   },
   devServer: {
