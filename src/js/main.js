@@ -63,7 +63,6 @@ let reviewForm = {
         return document.body.querySelector(".review_form");
     },
     setAddress: function (address, coords) {
-        console.log(address, coords);
         reviewForm.address = address;
         reviewForm.coords = coords;
         reviewForm.get().querySelector(".h_address").innerHTML = address;
@@ -191,7 +190,6 @@ let reviewForm = {
             })
         });
 
-        console.log(placemark.events);
 
         placemark.events.add("click", function (e) {
             try {
