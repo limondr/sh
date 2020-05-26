@@ -3,41 +3,27 @@ import "../font/firasans.css";
 import {
     initMap,
     geocoder,
-    createPlacemark,
-    createTempPlacemark,
-    destroyTempPlacemark
+    createPlacemark
 } from "./modules/yandex";
 import config from "./modules/config.json";
 import templateReview from "../views/review.hbs";
 import templateReviewForm from "../views/reviewForm.hbs";
 
 (async function () {
-    var { map, clusterer, openReviewBalloon } = await initMap("map", config.map);
+    var { map } = await initMap("map", config.map);
 
     loadStorage();
     map.events.add("click", async function (e) {
         e.preventDefault();
         reviewForm.destroy();
+
         var coords = e.get("coords");
         var address = await geocoder(coords);
-
-        var placemark = createTempPlacemark(coords, {
-            hintContent: address
-        });
 
         reviewForm.setAddress(address, coords);
         reviewForm.show();
         map.setCenter(coords, map.getZoom() >= 15 ? map.getZoom() : 15, {
             duration: 500
-        });
-
-        placemark.events.add("click", function (e) {
-            e.preventDefault();
-            reviewForm.setAddress(address, coords);
-            reviewForm.show();
-            map.setCenter(coords, map.getZoom() >= 15 ? map.getZoom() : 15, {
-                duration: 500
-            });
         });
     });
 })();
@@ -46,9 +32,9 @@ let reviewForm = {
     _reviews: [
         /*     {
                     address: "",
-                    coords: [],
                     reviews: [
                         {
+                            coords: [],
                             name: "",
                             place: "",
                             date: "",
@@ -73,7 +59,6 @@ let reviewForm = {
         reviewForm.address = "";
         reviewForm.coords = [];
         reviewForm.reviewClearinputs();
-        destroyTempPlacemark();
     },
     show: function () {
         let form = reviewForm.get();
@@ -109,14 +94,28 @@ let reviewForm = {
         }
     },
     getAddress: function (coords) {
+        reviewForm._reviews.forEach(function(review) {
+            if (review.findIndex(_review => _review.coords === coords)) {
+                return review.address;
+            }
+        });
+
+        return -1;
+    },
+    getCoords(address, place) {
         let index = reviewForm._reviews.findIndex(
-            review => review.coords === coords
+            review => review.address === address
         );
         if (index !== -1) {
-            return reviewForm._reviews[index].address;
+            let reviewIndex = reviewForm._reviews[index].reviews.findIndex(
+                review => review.place === place
+            );
+            if (reviewIndex !== -1) {
+                return reviewForm._reviews[index].reviews[reviewIndex].coords;
+            }
         }
 
-        return "";
+        return -1;
     },
     reviewClearinputs: function() {
         reviewForm.get().querySelector("input.input_name").value = "";
@@ -151,6 +150,7 @@ let reviewForm = {
                 reviewForm._reviews[index].reviews = [
                     ...reviewForm._reviews[index].reviews,
                     {
+                        coords: reviewForm.coords,
                         name,
                         place,
                         date: d.toLocaleDateString(),
@@ -162,9 +162,9 @@ let reviewForm = {
                     ...reviewForm._reviews,
                     {
                         address: reviewForm.address,
-                        coords: reviewForm.coords,
                         reviews: [
                             {
+                                coords: reviewForm.coords,
                                 name,
                                 place,
                                 date: d.toLocaleDateString(),
@@ -177,8 +177,7 @@ let reviewForm = {
         } catch (error) {
             console.log(error);
         }
-        localStorage.setItem("reviews_geo", JSON.stringify(reviewForm._reviews));
-        destroyTempPlacemark();
+        localStorage.setItem("reviews_geodata", JSON.stringify(reviewForm._reviews));
 
         var placemark = createPlacemark(reviewForm.coords, {
             hintContent: reviewForm.address,
@@ -190,15 +189,18 @@ let reviewForm = {
             })
         });
 
-
         placemark.events.add("click", function (e) {
             try {
                 e.preventDefault();
-                geocoder(e.get("coords")).then(function (res) {
-                    destroyTempPlacemark();
-                    reviewForm.setAddress(res, e.get("coords"));
+                let coords = placemark.geometry.getCoordinates();
+                geocoder(coords).then(function (res) {
+                    reviewForm.setAddress(res, coords);
                     reviewForm.updateReviews();
                     reviewForm.show();
+
+                    placemark.getMap().setCenter(coords, placemark.getMap().getZoom() >= 15 ? placemark.getMap().getZoom() : 15, {
+                        duration: 500
+                    });
                 });
             } catch (error) {
                 console.log(error);
@@ -209,14 +211,19 @@ let reviewForm = {
     }
 };
 
-window.balloonLink = function(address) {
-    reviewForm.setAddress(address);
+window.balloonLink = function(address, place) {
+    let coords = reviewForm.getCoords(address, place);
+    if (coords === -1) {
+        console.log('Запрошенная метка по данному адресу не найдена или была удалена...');
+        return;
+    }
+    reviewForm.setAddress(address, coords);
     reviewForm.updateReviews();
     reviewForm.show();
 }
 
 function loadStorage() {
-    let reviews = localStorage.getItem("reviews_geo") || "[]";
+    let reviews = localStorage.getItem("reviews_geodata") || "[]";
     reviewForm._reviews = JSON.parse(reviews);
     if (reviewForm._reviews.length === 0) {
         return;
@@ -224,7 +231,7 @@ function loadStorage() {
     reviewForm._reviews.forEach(function (item) {
         item.reviews.forEach(function (review) {
             let address = item.address;
-            let coords = item.coords;
+            let coords = review.coords;
             let place = review.place;
             let text = review.text;
             let date = review.date;
@@ -242,11 +249,15 @@ function loadStorage() {
             placemark.events.add("click", function (e) {
                 try {
                     e.preventDefault();
-                    geocoder(e.get("coords")).then(function (res) {
-                        destroyTempPlacemark();
-                        reviewForm.setAddress(res, e.get("coords"));
+                    let coords = placemark.geometry.getCoordinates();
+                    geocoder(coords).then(function (res) {
+                        reviewForm.setAddress(res, coords);
                         reviewForm.updateReviews();
                         reviewForm.show();
+
+                        placemark.getMap().setCenter(coords, placemark.getMap().getZoom() >= 15 ? placemark.getMap().getZoom() : 15, {
+                            duration: 500
+                        });
                     });
                 } catch (error) {
                     console.log(error);
