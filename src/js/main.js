@@ -19,6 +19,7 @@ import templateReviewForm from "../views/reviewForm.hbs";
 
         var coords = e.get("coords");
         var address = await geocoder(coords);
+        console.log(coords)
 
         reviewForm.setAddress(address, coords);
         reviewForm.show();
@@ -77,18 +78,26 @@ let reviewForm = {
         let index = reviewForm._reviews.findIndex(
             review => review.address === reviewForm.address
         );
+        let commentCount = 0;
+
         if (index !== -1) {
             reviewForm._reviews[index].reviews.forEach(function (review) {
-                reviewForm
-                    .get()
-                    .querySelector(".r_scroll").innerHTML += templateReviewForm({
-                        name: review.name,
-                        place: review.place,
-                        date: review.date,
-                        text: review.text
-                    });
+                if(review.coords === reviewForm.coords) {
+                    reviewForm
+                        .get()
+                        .querySelector(".r_scroll").innerHTML += templateReviewForm({
+                            name: review.name,
+                            place: review.place,
+                            date: review.date,
+                            text: review.text
+                        });
+                    
+                    commentCount++;
+                }
             });
-        } else {
+        }
+
+        if(commentCount === 0) {
             reviewForm.get().querySelector(".r_scroll").innerHTML =
                 '<div class="no_reviews">Будь первым! Оставь свой отзыв.</div>';
         }
