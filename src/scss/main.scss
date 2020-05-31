@@ -1,0 +1,213 @@
+html, body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.hide {
+    display: none !important;
+}
+:focus::-webkit-input-placeholder {color: transparent}
+:focus::-moz-placeholder          {color: transparent}
+:focus:-moz-placeholder           {color: transparent}
+:focus:-ms-input-placeholder      {color: transparent}
+textarea {
+    resize:none
+}
+.map {
+    height: 100%;
+}
+
+.review__address {
+    display: flex;
+    margin-bottom: 40px;
+}
+.review_form {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    width: 379px;
+    min-height: 527px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 20%;
+    left: 20%;
+}
+.r_header {
+    background-color: rgb(255, 134, 99);
+    width: 100%;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+}
+.h_marker {
+    background: url(../img/marker.png) no-repeat;
+    width: 8px;
+    height: 14px;
+    margin-left: 16px;
+}
+.h_address {
+    font-size: 12px;
+    font-family: 'Fira Sans Light';
+    color: rgb(255, 255, 255);
+    margin-left: 8px;
+    max-width: 82%;
+    word-wrap: break-word;
+}
+.h_close {
+    background: url(../img/close.png) no-repeat;
+    width: 14px;
+    height: 14px;
+    margin-left: auto;
+    margin-right: 12px;
+    cursor: pointer;
+}
+.r_scroll {
+    width: 357px;
+    height: 139px;
+    margin-top: 16px;
+    margin-left: 5px;
+    overflow: auto;
+}
+.r_scroll::-webkit-scrollbar{
+    width: 3px;
+}
+.r_scroll::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 10px;
+    background-color: rgb(196, 196, 196);
+}
+.border-line {
+    width: 92%;
+    margin-right: 5px;
+    height: 1px;
+    border-bottom: 1px solid #f0f0f0;
+}  
+.s_review {
+    width: 100%;
+    min-height: 45px;
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+}
+.sr_title {
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+.t_name {
+    color: rgb(79, 79, 79);
+    margin-right: 12px;
+    font-family: 'Fira Sans Medium';
+}
+.t_info {
+    color: rgba(79, 79, 79, 0.749);
+    font-family: 'Fira Sans Regular';
+}
+.sr_review {
+    margin-top: 12px;
+    font-size: 15px;
+    color: rgb(79, 79, 79);
+    font-family: 'Fira Sans Regular';
+}
+.form_review {
+    margin-top: 16px;
+    width: 90%;
+}
+.fr_title {
+    font-size: 16px;
+    font-family: 'Fira Sans Medium';
+    color: rgb(255, 134, 99);
+    text-transform: uppercase;
+}
+.fr_form {
+    width: 91%;
+    border: 1px solid rgb(196, 196, 196);
+    border-radius: 20px;
+    padding-left: 12px;
+    padding-right: 10px;
+    outline: none;
+    margin-top: 15px;
+}
+.size_form1 {
+    height: 34px;
+    font-size: 15px;
+    font-family: 'Fira Sans Light';
+    color: #000;
+}  
+.size_form2 {
+    height: 126px;
+    font-size: 15px;
+    font-family: 'Fira Sans Light';
+    padding-top: 10px;
+    color: #000;
+    overflow: auto;
+}
+.size_form2::-webkit-scrollbar{
+    width: 0px;
+}
+.size_form1::placeholder {
+    color: rgb(159, 159, 159);
+}  
+.size_form2::placeholder {
+    color: rgb(159, 159, 159);
+}
+.fr_form::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+.fr_form::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+.fr_form:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+.fr_form:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+.fr_form:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+.fr_form:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+.fr_form:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+.fr_form:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+.btn_add {
+    width: 87px;
+    height: 30px;
+    background-color: rgb(255, 134, 99);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Fira Sans Light';
+    font-size: 12px;
+}
+.btn_add:hover {
+    background: #e97b5b;
+}
+.no_reviews {
+    font-family: 'Fira Sans Regular';
+}
+.title_r {
+    font-family: 'Fira Sans Medium';
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.review__commit {
+    font-family: 'Fira Sans Regular';
+    font-size: 15px;
+    overflow: auto;
+    height: 119px;
+    overflow-wrap: break-word;
+}
+.rew_time {
+    font-family: 'Fira Sans Regular';
+    font-size: 15px;
+    overflow: auto;
+    text-align: right;
+    margin-top: 10px;
+}
+.red_text {
+    font-family: 'Fira Sans Regular';
+    margin-right: auto;
+    color: red;
+    margin-left: 25px;
+    margin-top: 10px;
+}
