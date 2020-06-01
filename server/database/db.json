@@ -1,0 +1,46 @@
+{
+  "messages": [
+    {
+      "nickname": "godvil",
+      "text": "Привет!",
+      "dateString": "01/06/2020 03:40",
+      "timestamp": 1590975608972
+    },
+    {
+      "nickname": "godvil",
+      "text": ":)",
+      "dateString": "01/06/2020 03:40",
+      "timestamp": 1590975633765
+    },
+    {
+      "nickname": "nika",
+      "text": "И тебе привет! ;)",
+      "dateString": "01/06/2020 03:56",
+      "timestamp": 1590976568469
+    },
+    {
+      "nickname": "godvil",
+      "text": "Как дела?",
+      "dateString": "01/06/2020 04:01",
+      "timestamp": 1590976889206
+    },
+    {
+      "nickname": "nika",
+      "text": "Хорошо!",
+      "dateString": "01/06/2020 04:08",
+      "timestamp": 1590977301629
+    }
+  ],
+  "users": [
+    {
+      "name": "Русаков Александр",
+      "nickname": "godvil",
+      "last_message": "Как дела?"
+    },
+    {
+      "name": "Демкова Дарья",
+      "nickname": "nika",
+      "last_message": "Хорошо!"
+    }
+  ]
+}
