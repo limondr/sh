@@ -35,12 +35,14 @@
     {
       "name": "Русаков Александр",
       "nickname": "godvil",
-      "last_message": "Как дела?"
+      "last_message": "Как дела?",
+      "avatar": "photos/godvil.jpg"
     },
     {
-      "name": "Демкова Дарья",
+      "name": "Dasha",
       "nickname": "nika",
-      "last_message": "Хорошо!"
+      "last_message": "Хорошо!",
+      "avatar": "photos/nika.jpg"
     }
   ]
 }
