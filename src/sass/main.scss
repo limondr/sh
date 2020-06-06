@@ -1,0 +1,474 @@
+body {
+  background: #09101a;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.hide {
+  display: none !important;
+}
+
+.messages {
+  font-size: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message {
+  margin-bottom: 20px;
+  padding: 20px 40px;
+  background: #fff;
+  display: inline-flex;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.main {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.auth {
+  width: 516px;
+  height: 552px;
+  background-color: rgb(23, 33, 43);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.auth_img {
+  width: 139px;
+  height: 139px;
+  border-radius: 50%;
+  background-color: rgb(36, 47, 61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 39px;
+}
+
+.img_at_img {
+  background: url(../img/message.png) no-repeat;
+  width: 85px;
+  height: 66px;
+}
+
+.h2_span {
+  font-family: "Ubuntu Medium";
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.h3_span {
+  font-family: "Ubuntu Light";
+  color: rgb(127, 145, 164);
+  font-size: 16px;
+  text-align: center;
+  margin-top: 16px;
+  width: 55%;
+  margin-bottom: 48px;
+}
+
+.chat_input {
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid #465362;
+  width: 290px;
+  height: 26px;
+  font-family: "Ubuntu Light";
+  color: #e5e5e5;
+  font-size: 16px;
+  padding-bottom: 7px;
+  padding-left: 8px;
+}
+
+.chat_input:focus {
+  border-bottom: 1px solid rgb(82, 136, 193);
+}
+
+.ots {
+  margin-top: 26px;
+}
+
+.chat_input::-webkit-input-placeholder {
+  color: #858e97;
+}
+
+.auth_btn {
+  width: 132px;
+  height: 43px;
+  border-radius: 5px;
+  background-color: rgb(82, 136, 193);
+  font-family: "Ubuntu";
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 38px;
+}
+
+.auth_btn:hover {
+  background: #1c3c5c;
+}
+
+.chat_main {
+  width: 802px;
+  height: 430px;
+  background: #17212b;
+  display: flex;
+}
+
+.left_bar {
+  width: 261px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.left_menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.left_img {
+  width: 34px;
+  height: 34px;
+  background-color: rgb(36, 47, 61);
+  border-radius: 50%;
+  margin-left: 10px;
+  margin-right: 5px;
+  background-size: 34px 34px !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.left_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.left_search {
+  width: 90px;
+  height: 24px;
+  border-radius: 2px;
+  background-color: rgb(36, 47, 61);
+  border: none;
+  outline: none;
+  margin-left: auto;
+  color: #fff;
+  font-family: "Ubuntu Light";
+  padding-left: 11px;
+}
+
+.row_t_img {
+  font-family: "Ubuntu Medium";
+  color: #fff;
+  font-size: 12px;
+  margin-left: 11px;
+}
+
+.clr_t_img {
+  font-family: "Ubuntu Light";
+  color: #51b3f3;
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.first_mes_name {
+  font-family: "Ubuntu Light";
+  font-size: 14px;
+  color: #fff;
+}
+
+.mes_txt {
+  font-family: "Ubuntu Light";
+  font-size: 14px;
+  color: #7f91a4;
+  width: 167px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sms_image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgb(176, 176, 176);
+  background-size: 48px 48px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.row_message {
+  display: flex;
+  align-items: center;
+}
+
+.srt2 {
+  margin-top: 20px;
+}
+
+.userlist {
+  width: 100%;
+  height: 83%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.right_bar {
+  width: 552px;
+  height: 100%;
+  background: #0e1621;
+}
+
+.right_info {
+  width: 100%;
+  height: 62px;
+  background: #17212b;
+  border-left: 1px solid #0e1621;
+  display: flex;
+  align-items: center;
+}
+
+.text_submit {
+  width: 100%;
+  height: 54px;
+  border-left: 1px solid #0e1621;
+  display: flex;
+  align-items: center;
+  background: #17212b;
+  margin-top: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.in_mes_text {
+  border: none;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Ubuntu";
+  margin-left: 10px;
+  width: 73%;
+
+}
+
+.button_send_mes {
+  width: 112px;
+  height: 28px;
+  border-radius: 5px;
+  background-color: rgb(82, 136, 193);
+  font-size: 14px;
+  font-family: "Ubuntu";
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.span_ch {
+  font-size: 14px;
+  font-family: "Ubuntu Light";
+  color: rgb(255, 255, 255);
+  margin-left: 11px;
+}
+
+.span_ch2 {
+  color: #7f91a4;
+}
+
+.chat_right {
+  width: 100%;
+  height: 294px;
+  background: #0e1621;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+}
+
+.me_sms {
+  max-width: 360px;
+  min-height: 33px;
+  min-width: 70px;
+  border-radius: 5px;
+  background-color: rgb(43, 82, 120);
+  font-size: 14px;
+  font-family: "Ubuntu Light";
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-left: auto;
+  margin-right: 22px;
+  padding-left: 7px;
+  margin-top: 5px;
+  word-break: break-all;
+  padding: 5px;
+
+}
+
+.for_me_sms {
+  max-width: 360px;
+  min-height: 33px;
+  min-width: 70px;
+  border-radius: 5px;
+  background-color: rgb(43, 82, 120);
+  font-size: 14px;
+  font-family: "Ubuntu Light";
+  color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-right: auto;
+  margin-left: 11px;
+  padding-left: 7px;
+  margin-top: 5px;
+  word-break: break-all;
+  padding: 5px;
+}
+
+.time_sms {
+  font-size: 12px;
+  font-family: "Ubuntu Light";
+  color: rgb(125, 168, 211);
+  margin-top: 5px;
+  margin-right: 5px;
+  min-width: 26px;
+  margin-left: auto;
+  padding-left: 10px;
+  min-width: 17%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.circle_img {
+  border-radius: 50%;
+  background-color: rgb(176, 176, 176);
+  width: 33px;
+  height: 33px;
+  margin-left: 20px;
+  background-size: 33px 33px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.circle_img_right {
+  border-radius: 50%;
+  background-color: rgb(176, 176, 176);
+  width: 33px;
+  height: 33px;
+  margin-right: 20px;
+  background-size: 33px 33px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.box_for_me,
+.box_me {
+  display: flex;
+}
+
+.add_img_profile {
+  border-radius: 4px;
+  background-color: #1e2935;
+  width: 364px;
+  height: 317px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.upload_image {
+  width: 180px;
+  height: 180px;
+  margin-top: 30px;
+  border-radius: 50%;
+  background: #17212b;
+  background-image: url(../img/camera.png);
+  background-size: 46px 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_up {
+  margin-top: 15px;
+  font-size: 14px;
+  font-family: "Ubuntu Light";
+  color: rgb(127, 145, 164);
+}
+
+.box_btn_up {
+  display: flex;
+  margin-top: 30px;
+}
+
+.save_btn {
+  border-radius: 3px;
+  background-color: rgb(29, 42, 57);
+  width: 170px;
+  height: 36px;
+  font-size: 15px;
+  font-family: "Ubuntu Light";
+  color: rgb(106, 178, 242);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn_nein {
+  width: 100px;
+  height: 36px;
+  font-size: 15px;
+  font-family: "Ubuntu Light";
+  color: rgb(106, 178, 242);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.siza_4 {
+  width: 45px;
+  height: 45px;
+}
+
+.size_photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}

@@ -1,74 +1,69 @@
-const HtmlPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const rules = require('./webpack.config.rules');
-const fs = require('fs');
 const path = require('path');
-
-const root = path.resolve('src');
-const files = fs.readdirSync(root)
-    .reduce((all, current) => {
-        const ext = path.extname(current);
-        const name = path.basename(current, ext);
-        const absPath = path.join(root, current);
-
-        if (!all.hasOwnProperty(ext)) {
-            all[ext] = [];
-        }
-
-        all[ext].push({ name, absPath });
-
-        return all;
-    }, { '.js': [], '.hbs': [] });
-const entries = files['.js'].reduce((all, { name, absPath }) => {
-    all[name] = absPath;
-
-    return all;
-}, {});
-const html = files['.hbs']
-    .filter(file => entries.hasOwnProperty(file.name))
-    .map((file) => {
-        return new HtmlPlugin({
-            title: file.name,
-            template: file.absPath,
-            filename: `${file.name}.html`,
-            chunks: [file.name]
-        });
-    });
-
-if (!html.length || !files['.hbs'].find(file => file.name === 'index')) {
-    html.push(new HtmlPlugin({
-        title: 'index',
-        template: 'index.hbs',
-        chunks: ['index']
-    }));
-}
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: entries,
-    output: {
-        filename: '[name].[hash].js',
-        path: path.resolve('dist')
-    },
-    mode: 'development',
-    devtool: 'source-map',
-    module: {
-        rules: [
-            ...rules,
-            {
-                test: /\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
+  entry: './src/js/main.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-first-webpack.bundle.js'
+  },
+  mode: process.env.NODE_ENV ? process.env.NODE_ENV : 'development',
+  module: {
+    rules: [
+      { test: /\.hbs$/, loader: "handlebars-loader" },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // fallback to style-loader in development
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              options: {},
             }
+          }
         ]
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot)$/,
+        use: 'file-loader?name=fonts/[name].[ext]!static'
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      }
+    ]
+  },
+  devServer: {
+    open: true
+  },
+  plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/index.hbs'
         }),
-        ...html,
-        new CleanWebpackPlugin(['dist'])
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '[name].css',
+        })
     ]
 };

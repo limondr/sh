@@ -1,0 +1,17 @@
+{{~#if self}}
+<div class="box_me">
+    <div class="me_sms">{{text}}<div class="time_sms s1">{{timestamp}}</div>
+    </div>
+    <div class="circle_img_right" style="background-image: url({{avatar_url}});"></div>
+</div>
+{{~^~}}
+<div class="box_for_me">
+    <div class="circle_img" style="background-image: url({{avatar_url}});"></div>
+    <div class="for_me_sms">
+        {{text}}
+        <div class="time_sms s2">
+            {{timestamp}}
+        </div>
+    </div>
+</div>
+{{~/if~}}
